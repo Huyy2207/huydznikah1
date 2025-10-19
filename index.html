@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Em bé của anh 💞</title>
+
+    <!-- Font viết tay -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --pink: #d81b60;
+        --bg: #fff0f5;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Dancing Script", cursive;
+        background: var(--bg);
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .card {
+        width: min(96%, 760px);
+        background: #fff;
+        border-radius: 18px;
+        padding: 40px 48px;
+        box-shadow: 0 18px 40px rgba(24, 24, 24, 0.08);
+        position: relative;
+      }
+
+      h1 {
+        text-align: center;
+        color: var(--pink);
+        font-size: 2rem;
+        margin: 0 0 12px 0;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #c2185b;
+        margin-top: 8px;
+        margin-bottom: 18px;
+        font-size: 1.05rem;
+      }
+
+      p,
+      .line {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        white-space: pre-line;
+        margin: 0 0 12px 0;
+      }
+
+      .center {
+        text-align: center;
+      }
+      .heart-static {
+        text-align: center;
+        font-size: 1.6rem;
+        color: #ff6fa5;
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+      }
+
+      .typing-title {
+        display: inline-block;
+        border-right: 2px solid var(--pink);
+        white-space: nowrap;
+        overflow: hidden;
+        animation: titleTyping 2.2s steps(30, end), titleBlink 0.8s infinite;
+        padding-right: 6px;
+      }
+      @keyframes titleTyping {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+      @keyframes titleBlink {
+        0%,
+        100% {
+          border-color: transparent;
+        }
+        50% {
+          border-color: var(--pink);
+        }
+      }
+
+      .music-control {
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+        height: 48px;
+        border-radius: 28px;
+        border: none;
+        background: transparent;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        box-shadow: 0 8px 20px rgba(216, 27, 96, 0.12);
+      }
+      .music-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--pink);
+        display: grid;
+        place-items: center;
+        color: #fff;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .floating-heart {
+        position: fixed;
+        pointer-events: none;
+        font-size: 20px;
+        opacity: 0;
+        animation: floatUp 6s linear forwards;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) scale(0.9);
+          opacity: 1;
+        }
+        40% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-280px) scale(1.1);
+          opacity: 0;
+        }
+      }
+
+      .signature {
+        margin-top: 22px;
+        font-style: italic;
+        color: #666;
+        opacity: 0;
+        transform: translateY(18px);
+        transition: all 1s ease;
+        text-align: right;
+        font-size: 1.15rem;
+      }
+      .signature.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .decor,
+      .decor2 {
+        position: absolute;
+        border-radius: 50%;
+        z-index: -1;
+        opacity: 0.3;
+      }
+      .decor {
+        top: -30px;
+        right: -30px;
+        width: 120px;
+        height: 120px;
+        background: #ff80ab;
+      }
+      .decor2 {
+        bottom: -40px;
+        left: -40px;
+        width: 150px;
+        height: 150px;
+        background: #f8bbd0;
+      }
+
+      /* corner video style */
+      .corner-video {
+        position: absolute;
+        bottom: 18px;
+        left: 18px;
+        width: 220px;
+        height: 130px;
+        border-radius: 12px;
+        object-fit: cover;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        z-index: 2;
+        opacity: 0.95;
+        transition: transform 0.4s ease, opacity 0.4s ease;
+      }
+      .corner-video:hover {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+
+      @media (max-width: 520px) {
+        .card {
+          padding: 24px;
+        }
+        h1 {
+          font-size: 1.4rem;
+        }
+        .corner-video {
+          width: 160px;
+          height: 96px;
+          left: 12px;
+          bottom: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" role="main" aria-labelledby="title">
+      <div class="decor" aria-hidden="true"></div>
+      <div class="decor2" aria-hidden="true"></div>
+
+      <h1 id="title">
+        <span class="typing-title">Gửi bảo bối nhỏ của anh 💌</span>
+      </h1>
+      <div class="subtitle center">Em bé của anh 💞</div>
+
+      <div id="text" class="line"></div>
+
+      <p class="center heart-static" aria-hidden="true">💗</p>
+
+      <p id="sig" class="signature">— Huy, người mà em ghét nhất 💋</p>
+
+      <div
+        class="music-control"
+        id="musicControl"
+        aria-hidden="false"
+        title="Bật nhạc nhé"
+      >
+        <button id="musicBtn" class="music-btn" aria-label="Bật nhạc">
+          🎵
+        </button>
+        <div style="color: #d81b60; font-size: 0.98rem">Bật nhạc nhé 💖</div>
+      </div>
+
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        class="corner-video"
+        id="cornerVideo"
+      >
+        <source src="7133412627274.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <audio id="bgMusic" preload="auto">
+      <source src="" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      const message = `Em à,
+
+      Huy chàng trai mà em ghét nhất. Anh biết câu đó vẫn làm em cười, và có lẽ cũng là lời nhắc về những ngày mình từng lạc nhau.
+
+      Sau bao nhiêu sóng gió, hiểu lầm, những lần im lặng kéo dài, cuối cùng ta lại về cùng một phía. Anh cảm ơn em vì đã quay lại, vì vẫn chọn tin rằng tình yêu này đáng để giữ.
+
+      Anh không hứa sẽ hoàn hảo, chỉ hứa sẽ cố gắng hơn lắng nghe em nhiều hơn, và nắm tay em chặt hơn mỗi khi em thấy sợ. Em là điều dịu dàng nhất mà anh từng có, là bình yên giữa những ngày giông bão.
+
+      Nếu em cho anh thêm cơ hội, anh sẽ dùng cả quãng đời phía trước để khiến em không bao giờ muốn rời đi nữa.
+
+      Cảm ơn em, vì đã quay lại, vì vẫn còn yêu anh.`;
+
+      const textEl = document.getElementById("text");
+      let i = 0;
+      const speed = 60; // ms per character (slower)
+      function typeChar() {
+        if (i < message.length) {
+          const ch = message.charAt(i);
+          textEl.innerHTML += ch === "\n" ? "<br>" : ch;
+          i++;
+          setTimeout(typeChar, speed);
+        } else {
+          setTimeout(
+            () => document.getElementById("sig").classList.add("show"),
+            1000
+          );
+        }
+      }
+      window.addEventListener("load", () => setTimeout(typeChar, 900));
+
+      const music = document.getElementById("bgMusic");
+      const btn = document.getElementById("musicBtn");
+      const control = document.getElementById("musicControl");
+      let play = false;
+      music.volume = 0.7;
+      function tryAutoPlay() {
+        music
+          .play()
+          .then(() => {
+            play = true;
+            btn.innerText = "⏸️";
+            control.style.transform = "scale(1.03)";
+          })
+          .catch(() => {
+            // autoplay bị chặn — người dùng có thể bấm nút
+          });
+      }
+      document.addEventListener("click", tryAutoPlay, { once: true });
+
+      btn.addEventListener("click", () => {
+        if (play) {
+          music.pause();
+          btn.innerText = "🎵";
+          control.style.transform = "scale(1)";
+        } else {
+          music.play().catch(() => {});
+          btn.innerText = "⏸️";
+          control.style.transform = "scale(1.03)";
+        }
+        play = !play;
+      });
+
+      function spawnHeart() {
+        const h = document.createElement("div");
+        h.className = "floating-heart";
+        h.textContent = ["💖", "💗", "💞"][Math.floor(Math.random() * 3)];
+        const left =
+          window.innerWidth * 0.12 + Math.random() * (window.innerWidth * 0.76);
+        h.style.left = Math.min(left, window.innerWidth - 30) + "px";
+        h.style.fontSize = 12 + Math.random() * 20 + "px";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 6200);
+      }
+      const heartInterval = setInterval(spawnHeart, 800);
+
+      window.addEventListener("beforeunload", () =>
+        clearInterval(heartInterval)
+      );
+    </script>
+  </body>
+</html>
